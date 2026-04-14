@@ -1,15 +1,25 @@
 .left-sidebar {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 0;
   overflow-y: auto;
   box-sizing: border-box;
+
+  /* 隐藏滚动条，但保留滚轮滚动 */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE / Edge */
+}
+
+.left-sidebar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .menu-title {
-  margin-bottom: 0;
-  padding: 9px 12px;
-  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
   background: linear-gradient(#c2cfdf, #597498);
   border-top: 1px solid #eef1f4;
   border-bottom: 1px solid #3e5b7e;
@@ -19,35 +29,44 @@
   line-height: 1.4;
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.35);
   user-select: none;
+  box-shadow: 0 1px 3px rgba(119, 119, 119, 0.28);
 }
 
 .menu-group {
-  margin-bottom: 0px;
+  margin-top: 12px;
 }
 
-/* 组标题也做成列表第一行 */
+/* 一级菜单：灰色、独立、有立体感 */
 .group-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 12px;
-  border: 1px solid silver;
-  border-radius: 8px 8px 0 0;
-  background: #fff;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background:
+          linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0.06) 48%),
+          linear-gradient(#d9dde3, #bcc3cd 52%, #b0b7c1);
+  border: 1px solid rgba(0, 0, 0, 0.22);
   color: #24364d;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.4;
   cursor: pointer;
   user-select: none;
-}
-
-.group-title:only-child {
-  border-radius: 8px;
+  box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.82),
+          0 1px 2px rgba(0,0,0,0.08);
+  transition: border-radius 180ms ease;
 }
 
 .group-title:hover {
-  background: #f7f9fc;
+  filter: brightness(1.02);
+}
+
+/* 展开后：底部两个角变直角 */
+.group-title.is-open {
+  border-radius: 10px 10px 0 0;
 }
 
 .group-arrow {
@@ -57,31 +76,37 @@
   line-height: 1;
 }
 
-/* 外层高度动画壳 */
+/* 二级菜单外层：和一级菜单留一点距离 */
 .group-children-shell {
   overflow: hidden;
-  will-change: height;
   position: relative;
+  margin-top: 0;
+  will-change: height;
 }
 
-/* 内层窗帘 reveal */
 .group-children-panel {
   will-change: clip-path;
 }
 
+/* 二级菜单：纯白连续栏 */
 .group-children {
   display: block;
+  background: #fff;
+  border: 1px solid #c8cdd5;
+  border-radius: 0 0 10px 10px;
+  overflow: hidden;
+  box-shadow:
+          0 1px 0 rgba(255,255,255,0.8),
+          inset 0 1px 0 rgba(255,255,255,0.75);
 }
 
-/* 关键：无 gap，连续白色行 */
 .child-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid silver;
-  border-top-width: 0;
+  padding: 10px 14px;
+  border-top: 1px solid #d7dbe1;
   background: #fff;
   color: #24364d;
   font-size: 14px;
@@ -91,9 +116,8 @@
   user-select: none;
 }
 
-.child-item:last-child {
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 1px rgba(255, 255, 255, 0.8);
+.child-item:first-child {
+  border-top: none;
 }
 
 .child-item:hover {
@@ -102,14 +126,13 @@
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
-/* 如果以后你要做当前选中项高亮，直接用这个类 */
 .child-item.active {
   background-image: linear-gradient(#0886ec, #1458bb);
   color: #fff;
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== 窗帘感：不是下落，不是卷轴 ===== */
+/* ===== 窗帘感 ===== */
 
 .menu-curtain-enter-active {
   transition: height 380ms ease-out;
@@ -129,20 +152,20 @@
 
 @keyframes curtainOpen {
   0% {
-    clip-path: inset(0 0 100% 0 round 0 0 8px 8px);
+    clip-path: inset(0 0 100% 0 round 10px);
   }
 
   100% {
-    clip-path: inset(0 0 0 0 round 0 0 8px 8px);
+    clip-path: inset(0 0 0 0 round 10px);
   }
 }
 
 @keyframes curtainClose {
   0% {
-    clip-path: inset(0 0 0 0 round 0 0 8px 8px);
+    clip-path: inset(0 0 0 0 round 10px);
   }
 
   100% {
-    clip-path: inset(0 0 100% 0 round 0 0 8px 8px);
+    clip-path: inset(0 0 100% 0 round 10px);
   }
 }

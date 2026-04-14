@@ -13,7 +13,7 @@ body,
 
 body {
   display: block;
-  background: #f5f7fa;
+  background: transparent;
 }
 
 #app {

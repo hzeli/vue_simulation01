@@ -84,11 +84,15 @@ const onLeave = (el: Element, done: () => void): void => {
         :key="group.key"
         class="menu-group"
     >
-      <div class="group-title" @click="toggleGroup(group.key)">
+      <div
+          class="group-title"
+          :class="{ 'is-open': openGroups.includes(group.key) }"
+          @click="toggleGroup(group.key)"
+      >
         <span>{{ group.title }}</span>
         <span class="group-arrow">
-          {{ openGroups.includes(group.key) ? '▼' : '▶' }}
-        </span>
+    {{ openGroups.includes(group.key) ? '▼' : '▶' }}
+  </span>
       </div>
 
       <Transition

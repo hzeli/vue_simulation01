@@ -12,8 +12,15 @@ body,
 }
 
 body {
-  position: relative;
   background: #d2d4dd;
+  background-image: linear-gradient(
+          90deg,
+          transparent 30%,
+          rgba(0, 0, 0, 0.02) 45%,
+          rgba(0, 0, 0, 0.02) 55%,
+          transparent 70%
+  );
+  background-size: 8px 8px;
   color: #24364d;
   font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
@@ -21,26 +28,9 @@ body {
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
 }
 
-/* 真正的竖纹层：固定铺满全屏 */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-          repeating-linear-gradient(
-                  90deg,
-                  rgba(255, 255, 255, 0.22) 0px,
-                  rgba(255, 255, 255, 0.22) 1px,
-                  rgba(0, 0, 0, 0.025) 1px,
-                  rgba(0, 0, 0, 0.025) 4px
-          );
-}
-
 #app {
-  position: relative;
-  z-index: 1;
+  width: 100%;
+  min-height: 100%;
 }
 
 a {

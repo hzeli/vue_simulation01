@@ -9,6 +9,16 @@
   overflow-y: hidden;
   white-space: nowrap;
   flex-wrap: nowrap;
+
+  /* 隐藏滚动条，但保留滚轮 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tab-bar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .tab-item {
