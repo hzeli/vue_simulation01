@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { getPageCache, setPageCache } from '../../stores/pageCache'
+import { getPageCache, setPageCache } from '@/stores/pageCache'
 import type {
   ColumnsPageCache,
   GenericRow,
   MenuItem
-} from '../../types/menu'
+} from '@/types/menu'
 
 const props = defineProps<{
   tab: MenuItem
@@ -25,7 +25,7 @@ const buildUrl = (): string => {
   return `${props.tab.api}?${params.toString()}`
 }
 
-const restoreCache = (cache: ColumnsPageCache<GenericRow>): void => {
+const restoreCache = (cache: ColumnsPageCache): void => {
   columnsData.value = [...cache.rows]
 }
 
@@ -90,7 +90,7 @@ watch(
       const cache = getPageCache(newKey)
 
       if (cache && cache.view === 'columns') {
-        restoreCache(cache as ColumnsPageCache<GenericRow>)
+        restoreCache(cache as ColumnsPageCache)
         return
       }
 

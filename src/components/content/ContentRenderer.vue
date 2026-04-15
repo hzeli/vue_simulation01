@@ -4,7 +4,7 @@ import JsonView from './JsonView.vue'
 import HealthView from './HealthView.vue'
 import DetailView from './DetailView.vue'
 import ColumnsView from './ColumnsView.vue'
-import type { MenuItem } from '../../types/menu'
+import type { MenuItem } from '@/types/menu'
 
 defineProps<{
   tab: MenuItem

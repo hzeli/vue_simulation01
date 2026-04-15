@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { getPageCache, setPageCache } from '../../stores/pageCache'
-import type { JsonPageCache, MenuItem } from '../../types/menu'
+import { getPageCache, setPageCache } from '@/stores/pageCache'
+import type { JsonPageCache, MenuItem } from '@/types/menu'
 
 const props = defineProps<{
   tab: MenuItem

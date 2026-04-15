@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { removePageCache } from '@/stores/pageCache'
-import TopHeader from '../components/layout/TopHeader.vue'
-import LeftSidebar from '../components/layout/LeftSidebar.vue'
-import TabBar from '../components/layout/TabBar.vue'
-import ContentRenderer from '../components/content/ContentRenderer.vue'
+import TopHeader from '@/components/layout/TopHeader.vue'
+import LeftSidebar from '@/components/layout/LeftSidebar.vue'
+import TabBar from '@/components/layout/TabBar.vue'
+import ContentRenderer from '@/components/content/ContentRenderer.vue'
 import type { MenuItem } from '@/types/menu'
 
 type MotionDirection = 'forward' | 'backward'
@@ -13,10 +13,12 @@ const tabList = ref<MenuItem[]>([])
 const activeTab = ref<string>('')
 const motionDirection = ref<MotionDirection>('forward')
 
+// 返回string所代表的tab值
 const getTabIndex = (key: string): number => {
   return tabList.value.findIndex((tab) => tab.key === key)
 }
 
+//通过判断新旧tab的index位置来对motionDirection进行赋值
 const setDirectionByTarget = (targetKey: string): void => {
   const currentIndex = getTabIndex(activeTab.value)
   const targetIndex = getTabIndex(targetKey)
@@ -60,13 +62,14 @@ const handleCloseTab = (key: string): void => {
 
   tabList.value.splice(index, 1)
 
+  // 如果关掉的页面不是当前页面，直接返回，不进行切换
   if (!isClosingActive) return
 
   const nextTab =
       tabList.value[index] ||
       tabList.value[index - 1] ||
       null
-
+// 如果关闭之后没有页面就赋值空字符串
   if (!nextTab) {
     activeTab.value = ''
     return
@@ -129,4 +132,4 @@ const motionName = computed<string>(() => {
   </div>
 </template>
 
-<style scoped src="../assets/styles/views/architecture-view.css"></style>
+
