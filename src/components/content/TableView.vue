@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { getPageCache, setPageCache } from '../../stores/pageCache'
+import { getPageCache, setPageCache } from '@/stores/pageCache'
 import type {
   ApiListResponse,
   GenericRow,
   MenuItem,
   TablePageCache
-} from '../../types/menu'
+} from '@/types/menu'
 
 const props = defineProps<{
   tab: MenuItem
@@ -43,7 +43,7 @@ const requestUrl = computed<string>(() => {
   return `${props.tab.api}?${params.toString()}`
 })
 
-const restoreCache = (cache: TablePageCache<GenericRow>): void => {
+const restoreCache = (cache: TablePageCache): void => {
   rows.value = [...cache.rows]
   total.value = cache.total
   pageNo.value = cache.pageNo
@@ -77,7 +77,7 @@ const loadData = async (): Promise<void> => {
       throw new Error(`请求失败：${response.status}`)
     }
 
-    const result = (await response.json()) as ApiListResponse<GenericRow>
+    const result = (await response.json()) as ApiListResponse
     console.log('接口返回结果:', result)
 
     const data = result.result
@@ -120,7 +120,7 @@ watch(
       const cache = getPageCache(newKey)
 
       if (cache && cache.view === 'table') {
-        restoreCache(cache as TablePageCache<GenericRow>)
+        restoreCache(cache as TablePageCache)
         return
       }
 
