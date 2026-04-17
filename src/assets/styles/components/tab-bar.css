@@ -12,14 +12,13 @@
   flex-wrap: nowrap;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  background:
-          linear-gradient(
-                  to bottom,
-                  #d7d9dd 0%,
-                  #cfd2d7 32%,
-                  #c4c8ce 68%,
-                  #bcc1c8 100%
-          );
+  background: linear-gradient(
+          to bottom,
+          #d7d9dd 0%,
+          #cfd2d7 38%,
+          #c5c9cf 72%,
+          #bec3ca 100%
+  );
   box-shadow:
           inset 0 1px 0 rgba(255, 255, 255, 0.72),
           inset 0 -1px 0 rgba(0, 0, 0, 0.05);
@@ -39,16 +38,16 @@
   right: 8px;
   bottom: 0;
   height: 1px;
-  background: #8e949d;
+  background: #8f959e;
   z-index: 1;
 }
 
-/* tab 数量少时等分 */
+/* tab 少时等分 */
 .tab-bar--even .tab-item {
   flex: 1 1 0;
 }
 
-/* 多 tab 时保留横向滚动 */
+/* 默认未激活：更浅 */
 .tab-item {
   position: relative;
   z-index: 2;
@@ -65,7 +64,12 @@
   border-right: 1px solid transparent;
   border-bottom: none;
   border-radius: 10px 10px 0 0;
-  background: transparent;
+  background: linear-gradient(
+          to bottom,
+          #d8dbe0 0%,
+          #d1d5da 45%,
+          #c8ccd2 100%
+  );
   color: #33455d;
   cursor: pointer;
   user-select: none;
@@ -76,6 +80,7 @@
           box-shadow 0.16s ease;
 }
 
+/* 未激活间隔竖线 */
 .tab-item + .tab-item::before {
   content: "";
   position: absolute;
@@ -100,36 +105,39 @@
   line-height: 1;
 }
 
+/* hover 只是轻微提亮 */
 .tab-item:hover {
   background: linear-gradient(
           to bottom,
-          rgba(255, 255, 255, 0.26),
-          rgba(255, 255, 255, 0.08)
+          #e0e3e7 0%,
+          #d7dbe0 45%,
+          #cdd2d8 100%
   );
 }
 
+/* 激活：更深、更突出 */
 .tab-item.active {
   z-index: 6;
   height: 40px;
   margin-top: 4px;
   margin-bottom: -1px;
-  background:
-          linear-gradient(
-                  to bottom,
-                  #f6f7f8 0%,
-                  #eceef1 18%,
-                  #d8dbe0 62%,
-                  #cfd3d8 100%
-          );
-  border-top: 1px solid #9ca2ab;
-  border-left: 1px solid #9da3ac;
-  border-right: 1px solid #9da3ac;
+  background: linear-gradient(
+          to bottom,
+          #f4f5f6 0%,
+          #e3e6ea 18%,
+          #cfd4da 62%,
+          #bcc2ca 100%
+  );
+  border-top: 1px solid #969da7;
+  border-left: 1px solid #979ea8;
+  border-right: 1px solid #979ea8;
+  color: #20344d;
   box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.8),
+          inset 0 1px 0 rgba(255, 255, 255, 0.82),
           0 1px 0 rgba(0, 0, 0, 0.03);
-  color: #24364d;
 }
 
+/* 关键：用这个桥把底线盖掉，看起来和下方拼在一起 */
 .tab-item.active::after {
   content: "";
   position: absolute;
@@ -137,15 +145,11 @@
   right: 1px;
   bottom: -1px;
   height: 2px;
-  background:
-          linear-gradient(
-                  to bottom,
-                  #d1d5da 0%,
-                  #d5d8dd 100%
-          );
+  background: #f3f5f8;
   z-index: 8;
 }
 
+/* 激活 tab 两侧不要再显示竖线 */
 .tab-item.active::before,
 .tab-item.active + .tab-item::before {
   opacity: 0;
