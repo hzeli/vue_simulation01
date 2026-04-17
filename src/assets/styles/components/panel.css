@@ -43,3 +43,10 @@
   min-height: 0;
   overflow: auto;
 }
+
+.block-4 .table-toolbar,
+.block-4 .page-header,
+.block-4 .json-toolbar,
+.block-4 .health-toolbar {
+  margin-top: 0;
+}
